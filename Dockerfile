@@ -1,9 +1,10 @@
 FROM php:8.1-apache
 
-COPY . /var/www/html/
+# Remove default index.html if exists
+RUN rm -rf /var/www/html/*
 
-# Change DocumentRoot
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/webapp|g' /etc/apache2/sites-available/000-default.conf
+# Copy full project into Apache root
+COPY . /var/www/html/
 
 RUN a2enmod rewrite
 
