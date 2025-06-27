@@ -1,23 +1,23 @@
 # Use official PHP + Apache base image
 FROM php:8.1-apache
 
-# Install mysqli & pdo_mysql extensions for full DB support
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# ✅ Install mysqli (must be before COPY!)
+RUN docker-php-ext-install mysqli
 
-# Clear default Apache html folder (clean start)
+# Clear Apache default html dir
 RUN rm -rf /var/www/html/*
 
-# Copy entire project to Apache root
+# Copy your project files
 COPY . /var/www/html/
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Give Apache user proper ownership to prevent permission issues
+# Give Apache user permission
 RUN chown -R www-data:www-data /var/www/html
 
-# Optional: Set working directory explicitly (not mandatory but good practice)
+# Optional: Set working dir
 WORKDIR /var/www/html
 
-# Expose Apache default HTTP port
+# Expose port 80
 EXPOSE 80
