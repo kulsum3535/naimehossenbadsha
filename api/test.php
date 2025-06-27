@@ -1,2 +1,2 @@
 <?php
-echo "OUTBOUND IP: " . $_SERVER['REMOTE_ADDR'];
+echo "OUTBOUND IP: " . file_get_contents('https://api.ipify.org');
