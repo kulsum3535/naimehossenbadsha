@@ -1,0 +1,18 @@
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+
+# Node stuff if any
+node_modules/
+
+# Env files (not using now)
+.env
+
+# Logs & backups
+*.log
+*.bak
+*.zip
+*.tar.gz
+*.tmp
+*.swp

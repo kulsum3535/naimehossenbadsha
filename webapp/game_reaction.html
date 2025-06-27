@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>⚡ Reaction Game</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>⚡ Reaction Game</h1>
+    <button id="start-btn" onclick="startGame()">Start</button>
+    <div id="game-box" style="width:300px; height:300px; border:1px solid #000; margin:20px auto; position:relative;"></div>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    const telegram_id = tg.initDataUnsafe.user.username;
+
+    function updateToken(amount) {
+      fetch('../api/update_balance.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `telegram_id=${telegram_id}&earned=${amount}`
+      });
+    }
+  </script>
+  <script src="assets/js/reaction_game.js"></script>
+</body>
+</html>

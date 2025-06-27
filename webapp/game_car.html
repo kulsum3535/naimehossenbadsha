@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🚗 Car Racing</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🚗 Car Racing</h1>
+    <canvas id="game" width="300" height="500" style="border:1px solid #000;"></canvas>
+    <p>Score: <span id="score">0</span> | Token: <span id="token">0</span></p>
+    <button id="left">Left</button>
+    <button id="right">Right</button>
+    <div id="gameOver" style="display:none;">
+      <p>Game Over! Final Score: <span id="scoreEnd"></span> | Token Earned: <span id="tokenEnd"></span></p>
+      <button onclick="restartGame()">Restart</button>
+    </div>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    const telegram_id = tg.initDataUnsafe.user.username;
+
+    function updateToken(amount) {
+      fetch('../api/update_balance.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `telegram_id=${telegram_id}&earned=${amount}`
+      });
+    }
+  </script>
+  <script src="assets/js/car_game.js"></script>
+</body>
+</html>
