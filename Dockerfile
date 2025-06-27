@@ -1,10 +1,14 @@
+# Use official PHP Apache
 FROM php:8.1-apache
 
+# Clear default html folder (optional but good)
+RUN rm -rf /var/www/html/*
+
+# Copy whole project
 COPY . /var/www/html/
 
-# Change DocumentRoot to /var/www/html/webapp
-RUN sed -i 's|/var/www/html|/var/www/html/webapp|g' /etc/apache2/sites-available/000-default.conf
-
+# Enable rewrite
 RUN a2enmod rewrite
 
+# Expose port 80
 EXPOSE 80
